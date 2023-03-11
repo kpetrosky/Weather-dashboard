@@ -1,9 +1,9 @@
-var apiKey = "30286bdb0d1bd12bbf351dc0bda01e86";
-var zipCode = "85745"; // replace with desired zip code
-var countryCode = "us"; // replace with desired country code
+var apiKey = "6c954c4894d6ffe51fdd55233b4b58b5";
+var lat = ""; // replace with desired latitude
+var lon = ""; // replace with desired longitude
 // fetch(api, {mode: 'no-cors'})
-fetch('https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}', {
-  mode: 'no-cors'
+fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`, {
+  mode: 'cors'
 })
   .then(response => {
     console.log(response);
@@ -13,8 +13,9 @@ fetch('https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&
   });
 
 
+
 // Get latitude and longitude from zip code
-var longlatUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+var longlatUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${lat},${lon}&appid=${apiKey}`;
 
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
@@ -31,7 +32,7 @@ fetch(longlatUrl)
     var lon = data.lon;
 
     // Get weather data using latitude and longitude
-    var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    var weatherUrl = `https://bulk.openweathermap.org/archive/{BULK_FILE_NAME}?appid={API key}`;
     return fetch(weatherUrl);
   })
   .then(response => {
@@ -63,24 +64,24 @@ function handleSearch(event) {
 function handleSearch(event) {
   event.preventDefault(); // Prevent the form from submitting and reloading the page
 
+};
 
+//   fetch(`/search?q=${encodeURIComponent(input)}`)
+//     .then(response => response.json())
+//     .then(data => {
+//       // Process the search results and display them to the user
+//     })
+//     .catch(error => {
+//       console.error('Error performing search:', error);
+//     });
+// }
 
-  fetch(`/search?q=${encodeURIComponent(input)}`)
-    .then(response => response.json())
-    .then(data => {
-      // Process the search results and display them to the user
-    })
-    .catch(error => {
-      console.error('Error performing search:', error);
-    });
-}
-
-var searchUrl = `https://openweathermap.org`;
-fetch(searchUrl)
-  .then(response => response.json())
-  .then(data => {
-    // Process the search results and display them to the user
-  })
-  .catch(error => {
-    console.error('Error performing search:', error);
-  });
+// var searchUrl = `https://openweathermap.org`;
+// fetch(searchUrl)
+//   .then(response => response.json())
+//   .then(data => {
+//     // Process the search results and display them to the user
+//   })
+//   .catch(error => {
+//     console.error('Error performing search:', error);
+//   })
